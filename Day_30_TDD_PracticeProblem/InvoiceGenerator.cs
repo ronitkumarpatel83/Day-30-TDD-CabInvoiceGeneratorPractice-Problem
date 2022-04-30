@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitTestProject;
 
 namespace Day_30_TDD_PracticeProblem
 {
@@ -52,12 +53,12 @@ namespace Day_30_TDD_PracticeProblem
             return Math.Max(totalFare, MINIMUM_FARE);
         }
         /// <summary>
-        /// Creating method for calculating Totalfare of multiple rides based on distance and time
+        /// Creating method for calculating Totalfare, number of rides and average totalfare of multiple rides based on distance and time
         /// </summary>
         /// <param name="rides"></param>
         /// <returns></returns>
         /// <exception cref="CabInvoiceException"></exception>
-        public double CalculateFare(Ride[] rides)
+        public InvoiceSummary CalculateFare(Ride[] rides)
         {
             double totalFare = 0;
             try
@@ -71,7 +72,8 @@ namespace Day_30_TDD_PracticeProblem
             {
                 throw new CabInvoiceException(CabInvoiceException.ExceptionType.NULL_RIDE, "Ride should not be null");
             }
-            return Math.Max(totalFare, MINIMUM_FARE);
+            double result = Math.Max(totalFare, MINIMUM_FARE);
+            return new InvoiceSummary(result, rides.Length);
         }
     }
 }
